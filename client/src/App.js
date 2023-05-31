@@ -5,33 +5,33 @@ import './App.css';
 const App = () => {
   const [apiRes, setApiRes] = useState();
 
-  useEffect(() => {
-    fetch("http://localhost:9000/test")
+  // useEffect(() => {
+  //   fetch("http://localhost:9000/test")
+  //     .then(res => res.text())
+  //     .then(res => setApiRes(res))
+  //     .catch(err => console.log(err));
+  // });
+
+  const login = () => {
+    fetch("http://localhost:9000/login")
       .then(res => res.text())
       .then(res => setApiRes(res))
       .catch(err => console.log(err));
-  });
+  };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <p>
-          {apiRes}
-        </p>
-      </header>
+    <>
+    <div className="App center">
+      <button className="login-btn" onClick={login}>
+          <span className="front">
+              LOGIN
+          </span>
+      </button>
     </div>
+    <div className='center'>
+      {apiRes}
+    </div>
+    </>
   );
 
 }
