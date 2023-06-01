@@ -9,12 +9,13 @@ const App = () => {
   const [loginState, setLoginState] = useState();
   
   useEffect(() => {
-    setLoginState(getHashParams()['login']);
-  });
+    let login = getHashParams()['login'];
+    setLoginState(login==='success');
+  },[]);
 
   return (
     <>
-      {loginState!=='true'?<Login />:<Profile/>}
+      {!loginState?<Login />:<Profile/>}
     </>
   );
 

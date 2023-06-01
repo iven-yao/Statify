@@ -12,6 +12,7 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 const FRONTEND_URI = process.env.FRONTEND_URI;
+const scope = 'user-read-private user-read-email playlist-read-private user-top-read user-follow-read user-read-recently-played';
 
 
 app.use(cors());
@@ -47,8 +48,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-    var state = generateCodeVerifier(16);
-    var scope = 'user-read-private user-read-email';
+    var state = generateCodeVerifier(128);
     res.cookie(spotifyVerifier, state);
     res.redirect('https://accounts.spotify.com/authorize?'+
         querystring.stringify({
@@ -93,7 +93,7 @@ app.get('/callback', (req, res) => {
                 refresh_token = body.refresh_token;
 
                 res.redirect(`${FRONTEND_URI}/#${querystring.stringify({
-                    login: true
+                    login: 'success'
                 })}`)
             } else {
                 res.redirect(`/#${querystring.stringify({error: 'invalid_token'})}`);
@@ -102,7 +102,7 @@ app.get('/callback', (req, res) => {
     }
 });
 
-app.get('/test', async (req, res) => {
+app.get('/profile', async (req, res) => {
     const response = await getProfile();
     res.send(response.data);
 }); 

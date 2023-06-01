@@ -1,36 +1,36 @@
 body {
-  font-weight: 600;
-  font-family: 'Julius Sans One', sans-serif;
-  background-color: black;
-  color: white;
+    background-color: var(--black);
+    font-family: "Josefin Sans", sans-serif;
+    color: white;
 }
 
 .center {
-  display:flex;
-  height: 50vh;
-  position: relative;
-  margin:auto;
-  justify-content: center;
-  align-items: center;
+    display:flex;
+    height: 100vh;
+    position: relative;
+    margin:auto;
+    justify-content: center;
+    align-items: center;
 }
 
 .enter-btn {
-  color: black;
-  font-size: 64px;
-  text-decoration: none;
-  background-color: darkolivegreen;
-  border-radius: 61px;
-  padding: 0px;
+    font-size: 48px;
+    text-decoration: none;
+    background-color: var(--greenshade);
+    border-radius: 61px;
+    padding: 0px;
 }
 
 .front {
-  display: block;
-  background-color: olivedrab;
-  padding: 5px 60px;
-  border-radius: 61px;
-  transform: translateY(-10px);
+    display: block;
+    font-weight: 500;
+    font-family: sans-serif;
+    background-color: var(--green);
+    padding: 3px 40px;
+    border-radius: 61px;
+    transform: translateY(-10px);
 }
 
 .enter-btn:active .front {
-  transform: translateY(-2px);
+    transform: translateY(-2px);
 }
