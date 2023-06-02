@@ -43,6 +43,21 @@ const getProfile = async () => {
     return await axios.get(url, {headers});
 }
 
+const getTop = async (type, time_range) => {
+    const headers = {
+        Authorization: `Bearer ${access_token}`,
+        'Content-Type': 'application/json',
+    };
+    let url = `${spotifyAPI}/me/top/${type}?${querystring.stringify({
+        time_range: time_range,
+        limit: 50
+    })}`;
+
+    console.log(url);
+
+    return await axios.get(url, {header});
+}
+
 app.get('/', (req, res) => {
     res.send(`SPOTIFY API IS LISTENING ON PORT${PORT}`);
 });
@@ -106,6 +121,13 @@ app.get('/profile', async (req, res) => {
     const response = await getProfile();
     res.send(response.data);
 }); 
+
+app.get('/top/:type/:time_range', async (req, res) => {
+    const type = req.params.type;
+    const time_range = req.params.time_range;
+    const response = await getTop(type, time_range);
+    res.send(response.data);
+});
 
 app.listen(PORT, ()=> {
     console.log(`api listening on port ${PORT}`);

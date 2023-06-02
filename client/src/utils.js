@@ -1,3 +1,5 @@
+export const serverURI = 'http://localhost:9000';
+
 export const getHashParams = () => {
     const hashParams = {};
     let e;

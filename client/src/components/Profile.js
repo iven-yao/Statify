@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {RxDotFilled} from 'react-icons/rx';
+import { serverURI } from "../utils";
 
 const Profile = () => {
 
     const [profile, setProfile] = useState();
 
     useEffect(() => {
-        fetch('http://localhost:9000/profile')
+        fetch(`${serverURI}/profile`)
             .then(res => res.json())
             .then(res => setProfile(res))
             .catch(err => console.log(err));
@@ -15,7 +16,7 @@ const Profile = () => {
     return (
         <>
             {profile?
-                <div className="flex justify-start items-end">
+                <div className="flex justify-start items-end bg-black">
                     <img src={profile.images[0].url} height='300' width='300' className="rounded-full m-5"/> 
                     <div className>
                         <div className="text-base pb-5">Profile</div>
