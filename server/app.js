@@ -53,9 +53,7 @@ const getTop = async (type, time_range) => {
         limit: 50
     })}`;
 
-    console.log(url);
-
-    return await axios.get(url, {header});
+    return await axios.get(url, {headers});
 }
 
 app.get('/', (req, res) => {

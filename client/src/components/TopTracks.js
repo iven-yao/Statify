@@ -26,6 +26,31 @@ const TopTracks = () => {
 
     return (
         <>
+        {fourWeek? 
+            <div className="m-5">
+                TOP TRACKS THIS MONTH
+                {fourWeek.items.map((item, index)=>{
+                    return (
+                        <div className="flex items-center my-2 justify-between" key={index}>
+                            <div className="flex items-center">
+                                <img src={item.album.images[0].url} className="mr-5 aspect-square w-12 object-cover" />
+                                <div>
+                                    {item.name}<br/>
+                                    {item.artists.map((artist, index) => {
+                                        return index==0? artist.name: ','+artist.name;
+                                    })}
+                                </div>
+                            </div>
+                            <div className="ml-5 flex">
+                                <div>{index+1}</div>
+                                <div>(-)</div>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+            :<div>TOP ARTISTS</div>
+        }
         </>
     );
 };
