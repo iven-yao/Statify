@@ -32,28 +32,64 @@ const generateCodeVerifier = (len) => {
 const spotifyVerifier = 'spotify_state';
 let access_token;
 let refresh_token;
+let expire_time;
+
+const getTimestampInSeconds = () => {
+    return Math.floor(Date.now() / 1000)
+}
 
 const spotifyAPI = 'https://api.spotify.com/v1';
-const getProfile = async () => {
+const getHeaders = () => {
+    if(getTimestampInSeconds() >= expire_time) {
+        console.log('EXPIRED!!!');
+
+        var authOptions = {
+            url: 'https://accounts.spotify.com/api/token',
+            headers: { 'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64')) },
+            form: {
+                grant_type: 'refresh_token',
+                refresh_token: refresh_token
+            },
+            json: true
+        };
+        
+        request.post(authOptions, function(error, response, body) {
+            if (!error && response.statusCode === 200) {
+                access_token = body.access_token;
+                refresh_token = body.refresh_token;
+                expire_time = getTimestampInSeconds()+body.expires_in;
+            }
+        });
+    }
     const headers = {
         Authorization: `Bearer ${access_token}`,
         'Content-Type': 'application/json',
     };
+
+    return headers;
+}
+
+const getProfile = async () => {
+    const headers = getHeaders();
     let url =  `${spotifyAPI}/me`;
-    return await axios.get(url, {headers});
+    const response = await axios.get(url, {headers})
+        .catch(err=> {
+            console.log(err);
+        });
+    return response;
 }
 
 const getTop = async (type, time_range) => {
-    const headers = {
-        Authorization: `Bearer ${access_token}`,
-        'Content-Type': 'application/json',
-    };
+    const headers = getHeaders();
     let url = `${spotifyAPI}/me/top/${type}?${querystring.stringify({
         time_range: time_range,
         limit: 50
     })}`;
-
-    return await axios.get(url, {headers});
+    const response = await axios.get(url, {headers})
+        .catch(err=> {
+            console.log(err);
+        });
+    return response;
 }
 
 app.get('/', (req, res) => {
@@ -104,6 +140,7 @@ app.get('/callback', (req, res) => {
             if(!error && response.statusCode === 200) {
                 access_token = body.access_token;
                 refresh_token = body.refresh_token;
+                expire_time = getTimestampInSeconds()+body.expires_in;
 
                 res.redirect(`${FRONTEND_URI}/#${querystring.stringify({
                     login: 'success'
