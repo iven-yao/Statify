@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Login from './components/Login';
-import Profile from './components/Profile';
 import { getHashParams } from './utils';
+import Main from './components/Main';
 
 
 const App = () => {
@@ -10,12 +10,20 @@ const App = () => {
   
   useEffect(() => {
     let login = getHashParams()['login'];
-    setLoginState(login==='success');
+    if(login==='success') {
+      localStorage.setItem('expiration', Math.floor(Date.now() / 1000) + 3600);
+    }
+    var expiration = localStorage.getItem('expiration');
+    if(expiration < Math.floor(Date.now()/1000)) {
+      localStorage.removeItem('expiration');
+      expiration = null;
+    }
+    setLoginState(expiration);
   },[]);
 
   return (
     <>
-      {!loginState?<Login />:<Profile/>}
+      {!loginState?<Login />:<Main/>}
     </>
   );
 

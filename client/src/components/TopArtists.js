@@ -3,6 +3,7 @@ import { serverURI } from "../utils";
 import {MdFiberNew} from "react-icons/md";
 import {TiArrowSortedDown, TiArrowSortedUp, TiEquals} from "react-icons/ti";
 import {BsQuestionCircleFill} from "react-icons/bs";
+import Loading from "./Loading";
 
 const TopArtists = () => {
     
@@ -50,7 +51,7 @@ const TopArtists = () => {
     return (
         <>
         {fourWeek&&sixMonth? 
-            <div className="m-5">
+            <div className="p-24">
                 <div className="flex items-center justify-between">
                     TOP 50 ARTISTS THIS MONTH
                     <span title={explaination}><BsQuestionCircleFill/></span>
@@ -80,7 +81,8 @@ const TopArtists = () => {
                     );
                 })}
             </div>
-            :<div>TOP ARTISTS</div>
+            :
+            <Loading/>
         }
         </>
     );

@@ -35,32 +35,36 @@ let refresh_token;
 let expire_time;
 
 const getTimestampInSeconds = () => {
-    return Math.floor(Date.now() / 1000)
+    return Math.floor(Date.now() / 1000);
 }
 
 const spotifyAPI = 'https://api.spotify.com/v1';
+
+const refreshAccessToken = async () => {
+    var authOptions = {
+        url: 'https://accounts.spotify.com/api/token',
+        headers: { 'Authorization': 'Basic ' + (new Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')) },
+        form: {
+            grant_type: 'refresh_token',
+            refresh_token: refresh_token
+        },
+        json: true
+    };
+    
+    request.post(authOptions, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+            access_token = body.access_token;
+            expire_time = getTimestampInSeconds()+body.expires_in;
+        }
+    });
+};
+
 const getHeaders = () => {
     if(getTimestampInSeconds() >= expire_time) {
         console.log('EXPIRED!!!');
-
-        var authOptions = {
-            url: 'https://accounts.spotify.com/api/token',
-            headers: { 'Authorization': 'Basic ' + (new Buffer.from(client_id + ':' + client_secret).toString('base64')) },
-            form: {
-                grant_type: 'refresh_token',
-                refresh_token: refresh_token
-            },
-            json: true
-        };
-        
-        request.post(authOptions, function(error, response, body) {
-            if (!error && response.statusCode === 200) {
-                access_token = body.access_token;
-                refresh_token = body.refresh_token;
-                expire_time = getTimestampInSeconds()+body.expires_in;
-            }
-        });
+        refreshAccessToken();
     }
+
     const headers = {
         Authorization: `Bearer ${access_token}`,
         'Content-Type': 'application/json',
@@ -142,9 +146,7 @@ app.get('/callback', (req, res) => {
                 refresh_token = body.refresh_token;
                 expire_time = getTimestampInSeconds()+body.expires_in;
 
-                res.redirect(`${FRONTEND_URI}/#${querystring.stringify({
-                    login: 'success'
-                })}`)
+                res.redirect(`${FRONTEND_URI}/#${querystring.stringify({login: 'success'})}`);
             } else {
                 res.redirect(`/#${querystring.stringify({error: 'invalid_token'})}`);
             }
@@ -154,14 +156,22 @@ app.get('/callback', (req, res) => {
 
 app.get('/profile', async (req, res) => {
     const response = await getProfile();
-    res.send(response.data);
+    if(response.data != undefined) {
+        res.send(response.data);
+    } else {
+        res.redirect(`${FRONTEND_URI}`);
+    }
 }); 
 
 app.get('/top/:type/:time_range', async (req, res) => {
     const type = req.params.type;
     const time_range = req.params.time_range;
     const response = await getTop(type, time_range);
-    res.send(response.data);
+    if(response.data != undefined) {
+        res.send(response.data);
+    } else {
+        res.redirect(`${FRONTEND_URI}`);
+    }
 });
 
 app.listen(PORT, ()=> {
