@@ -19,8 +19,8 @@ const Profile = () => {
         <>
             {profile?
                 <div>
-                    <div className="flex justify-start items-end">
-                        <img src={profile.images[0].url} width='300' className="rounded-full m-5 aspect-square" alt="profile pic"/> 
+                    <div className="flex justify-center items-end">
+                        <img src={profile.images[0].url} width='150' className="rounded-full m-5 aspect-square" alt="profile pic"/> 
                         <div>
                             <div className="text-xl pb-5">Profile</div>
                             <div className="text-6xl font-black">{profile['display_name']}</div>

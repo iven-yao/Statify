@@ -5,17 +5,17 @@ import StatifyPNG from '../assets/statify.png';
 const Nav = () => {
 
     return (
-        <nav className='flex fixed bottom-0 bg-black w-screen justify-between px-10 items-center'>
+        <nav className='flex fixed bottom-0 bg-black w-screen px-10 items-center'>
             
-            <div className="flex justify-start bg-black items-center">
-                <img src={StatifyPNG} width='50' className="rounded-full m-2 aspect-square" alt="profile pic"/> 
+            <div className="flex items-center">
+                <img src={StatifyPNG} width='40' className="rounded-full m-2 aspect-square" alt="profile pic"/> 
                 <div>
                     <div className="text-xl">Statify</div>
-                    <div className='text-sm'>your personal charts</div>
+                    <div className='text-sm whitespace-nowrap'>your personal charts</div>
                 </div>
             </div>
 
-            <div className='flex'>
+            <div className='flex justify-center w-screen'>
                 <NavLink to='/profile' className='mx-5'>
                     PROFILE
                 </NavLink>
@@ -26,7 +26,7 @@ const Nav = () => {
                     TRACKS
                 </NavLink>      
             </div>
-            <div>
+            <div className='float-right'>
                 GITHUB
             </div>
         </nav>

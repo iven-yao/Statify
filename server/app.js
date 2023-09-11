@@ -97,7 +97,7 @@ const getTop = async (type, time_range) => {
 }
 
 app.get('/', (req, res) => {
-    res.send(`SPOTIFY API IS LISTENING ON PORT${PORT}`);
+    res.send(`SPOTIFY API IS LISTENING ON PORT ${PORT}`);
 });
 
 app.get('/login', (req, res) => {
