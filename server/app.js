@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const express = require('express');
-const axios = require('axios');
 const cors = require('cors');
 const cookies = require('cookie-parser');
 const querystring = require('querystring');
@@ -30,71 +29,6 @@ const generateCodeVerifier = (len) => {
 }
 
 const spotifyVerifier = 'spotify_state';
-let access_token;
-let refresh_token;
-let expire_time;
-
-const getTimestampInSeconds = () => {
-    return Math.floor(Date.now() / 1000);
-}
-
-const spotifyAPI = 'https://api.spotify.com/v1';
-
-const refreshAccessToken = async () => {
-    var authOptions = {
-        url: 'https://accounts.spotify.com/api/token',
-        headers: { 'Authorization': 'Basic ' + (new Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')) },
-        form: {
-            grant_type: 'refresh_token',
-            refresh_token: refresh_token
-        },
-        json: true
-    };
-    
-    request.post(authOptions, function(error, response, body) {
-        if (!error && response.statusCode === 200) {
-            access_token = body.access_token;
-            expire_time = getTimestampInSeconds()+body.expires_in;
-        }
-    });
-};
-
-const getHeaders = () => {
-    if(getTimestampInSeconds() >= expire_time) {
-        console.log('EXPIRED!!!');
-        refreshAccessToken();
-    }
-
-    const headers = {
-        Authorization: `Bearer ${access_token}`,
-        'Content-Type': 'application/json',
-    };
-
-    return headers;
-}
-
-const getProfile = async () => {
-    const headers = getHeaders();
-    let url =  `${spotifyAPI}/me`;
-    const response = await axios.get(url, {headers})
-        .catch(err=> {
-            console.log(err);
-        });
-    return response;
-}
-
-const getTop = async (type, time_range) => {
-    const headers = getHeaders();
-    let url = `${spotifyAPI}/me/top/${type}?${querystring.stringify({
-        time_range: time_range,
-        limit: 50
-    })}`;
-    const response = await axios.get(url, {headers})
-        .catch(err=> {
-            console.log(err);
-        });
-    return response;
-}
 
 app.get('/', (req, res) => {
     res.send(`SPOTIFY API IS LISTENING ON PORT ${PORT}`);
@@ -142,11 +76,10 @@ app.get('/callback', (req, res) => {
 
         request.post(authOptions, (error, response, body) => {
             if(!error && response.statusCode === 200) {
-                access_token = body.access_token;
-                refresh_token = body.refresh_token;
-                expire_time = getTimestampInSeconds()+body.expires_in;
+                const access_token = body.access_token;
+                const refresh_token = body.refresh_token;
 
-                res.redirect(`${FRONTEND_URI}/#${querystring.stringify({login: 'success'})}`);
+                res.redirect(`${FRONTEND_URI}/#${querystring.stringify({access_token, refresh_token})}`);
             } else {
                 res.redirect(`/#${querystring.stringify({error: 'invalid_token'})}`);
             }
@@ -154,24 +87,25 @@ app.get('/callback', (req, res) => {
     }
 });
 
-app.get('/profile', async (req, res) => {
-    const response = await getProfile();
-    if(response.data != undefined) {
-        res.send(response.data);
-    } else {
-        res.redirect(`${FRONTEND_URI}`);
-    }
-}); 
+app.get('/refresh_token', (req, res) => {
+    const refresh_token = req.query.refresh_token;
 
-app.get('/top/:type/:time_range', async (req, res) => {
-    const type = req.params.type;
-    const time_range = req.params.time_range;
-    const response = await getTop(type, time_range);
-    if(response.data != undefined) {
-        res.send(response.data);
-    } else {
-        res.redirect(`${FRONTEND_URI}`);
-    }
+    var authOptions = {
+        url: 'https://accounts.spotify.com/api/token',
+        headers: { 'Authorization': 'Basic ' + (new Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')) },
+        form: {
+            grant_type: 'refresh_token',
+            refresh_token: refresh_token
+        },
+        json: true
+    };
+    
+    request.post(authOptions, function(error, response, body) {
+        if (!error && response.statusCode === 200) {
+            const access_token = body.access_token;
+            res.send(access_token);
+        }
+    });
 });
 
 app.listen(PORT, ()=> {

@@ -1,5 +1,7 @@
 export const serverURI = 'http://localhost:9000';
 
+export const explaination = "Position changed mark is relative to your own six-month data.";
+
 export const getHashParams = () => {
     const hashParams = {};
     let e;
@@ -10,3 +12,7 @@ export const getHashParams = () => {
     }
     return hashParams;
 };
+
+export const getTimestampInSeconds = () => {
+    return Math.floor(Date.now() / 1000);
+}

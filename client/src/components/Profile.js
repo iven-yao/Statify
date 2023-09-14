@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from "react";
-// import {RxDotFilled} from 'react-icons/rx';
-import { serverURI } from "../utils";
 import { RxDotFilled} from "react-icons/rx";
 import Loading from "./Loading";
+import { getProfile, logout } from "../utils/spotifyAPI";
 
 const Profile = () => {
 
     const [profile, setProfile] = useState();
 
     useEffect(() => {
-        fetch(`${serverURI}/profile`)
-            .then(res => res.json())
-            .then(res => setProfile(res))
-            .catch(err => console.log(err));
+        const fetch = async() => {
+            const res = await getProfile();
+            setProfile(res.data);
+        };
+
+        fetch().catch(err => {
+            console.error(err);
+            logout();
+        });
     },[]);
 
     return (
