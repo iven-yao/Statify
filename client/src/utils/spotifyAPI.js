@@ -31,6 +31,7 @@ export const getAccessToken = () => {
     const {error, access_token, refresh_token} = getHashParams();
 
     if(error) {
+        console.log('ERROR!!!');
         console.error(error);
         refreshAccessToken();
     }
