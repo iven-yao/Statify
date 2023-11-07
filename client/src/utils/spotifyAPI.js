@@ -1,6 +1,5 @@
-import {getHashParams, getTimestampInSeconds, serverURI} from './utils';
 import axios from 'axios';
-
+const {getHashParams, getTimestampInSeconds, serverURI} = require('./utils');
 const querystring = require('querystring');
 
 let expire_time = 3600;
@@ -54,7 +53,7 @@ export const getAccessToken = () => {
 
 export const logout = () => {
     window.localStorage.clear();
-    window.location.reload();
+    // window.location.reload();
 }
 
 const getHeaders = () => ({
