@@ -19,7 +19,7 @@ const refreshAccessToken = async () => {
             console.log('new access token > ',res.data);
             storeAccessToken(res.data);
             storeTokenTime();
-            window.location.reload();
+            // window.location.href = 'http://localhost:3000';
         });
     } catch(err) {
         console.error(err);
@@ -62,23 +62,23 @@ export const getAccessToken = () => {
 }
 
 export const logout = () => {
+    console.log('LOGOUT');
     window.localStorage.clear();
-    window.location.reload();
+    window.location.href = 'http://localhost:3000';
 }
 
-const getHeaders = () => ({
+export const getHeaders = () => ({
         Authorization: `Bearer ${getAccessToken()}`,
         'Content-Type': 'application/json',
     });
 
-export const getProfile = async () => {
-    const headers = getHeaders();
+export const getProfile = async (headers) => {
+    // const headers = getHeaders();
     let url =  `${spotifyAPI}/me`;
     return await axios.get(url, {headers});
 }
 
-const getTop = async (type, time_range) => {
-    const headers = getHeaders();
+const getTop = async (type, time_range, headers) => {
     let url = `${spotifyAPI}/me/top/${type}?${querystring.stringify({
         time_range: time_range,
         limit: 50
@@ -89,8 +89,8 @@ const getTop = async (type, time_range) => {
         });
 }
 
-export const getTopArtists = async() => (
-    axios.all([getTop('artists','long_term'), getTop('artists','medium_term'), getTop('artists','short_term')])
+export const getTopArtists = async(headers) => (
+    axios.all([getTop('artists','long_term',headers), getTop('artists','medium_term',headers), getTop('artists','short_term',headers)])
     .then( axios.spread((long, mid, short) => ({
                 long_term: long.data,
                 medium_term: mid.data,
@@ -100,8 +100,8 @@ export const getTopArtists = async() => (
     )
 );
 
-export const getTopTracks = async() => (
-    axios.all([getTop('tracks','long_term'), getTop('tracks','medium_term'), getTop('tracks','short_term')])
+export const getTopTracks = async(headers) => (
+    axios.all([getTop('tracks','long_term',headers), getTop('tracks','medium_term',headers), getTop('tracks','short_term',headers)])
     .then( axios.spread((long, mid, short) => ({
                 long_term: long.data,
                 medium_term: mid.data,

@@ -14,7 +14,6 @@ const Main = () => {
                 <Nav/>
                 <Routes>
                     <Route path="/" element={<Profile />} />
-                    <Route path="/profile" element={<Profile/>} />
                     <Route path="/artists" element={<TopArtists/>} />
                     <Route path="/tracks" element={<TopTracks/>} />
                 </Routes>
