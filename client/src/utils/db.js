@@ -1,20 +1,19 @@
 const querystring = require('querystring');
-
-const dbURI = 'http://localhost:5566';
+const {serverURI} = require('./utils');
 
 const headers = {
     'Content-Type': 'application/json',
 };
 
 export const getUesrs = async(query) => {
-    let url = `${dbURI}/v1/users?${querystring.stringify(query)}`;
+    let url = `${serverURI}/v1/users?${querystring.stringify(query)}`;
     let ret = '';
     await fetch(url).then((res) => ret = res.json());
     return ret;
 }
 
 export const createUser = async(user) => {
-    let url = `${dbURI}/v1/users`;
+    let url = `${serverURI}/v1/users`;
     let payload = {
         'spotify_id': user.id, 
         'display_name': user.display_name, 
@@ -33,7 +32,7 @@ export const createUser = async(user) => {
 }
 
 export const updateUser = async(id, user) => {
-    let url = `${dbURI}/v1/users/${id}`;
+    let url = `${serverURI}/v1/users/${id}`;
     let payload = {
         'display_name': user.display_name, 
         'profile_img': user.images[0].url, 
