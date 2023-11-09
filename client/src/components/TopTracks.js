@@ -4,7 +4,7 @@ import {MdFiberNew} from "react-icons/md";
 import {TiArrowSortedDown, TiArrowSortedUp, TiEquals} from "react-icons/ti";
 import {BsQuestionCircleFill} from "react-icons/bs";
 import Loading from "./Loading";
-import { getTopTracks } from "../utils/spotifyAPI";
+import { getTopTracks, getHeaders } from "../utils/spotifyAPI";
 
 const TopTracks = () => {
     
@@ -27,7 +27,8 @@ const TopTracks = () => {
 
     useEffect(() => {
         const fetchData = async() => {
-            const {long_term, medium_term, short_term} = await getTopTracks();
+            const headers = getHeaders();
+            const {long_term, medium_term, short_term} = await getTopTracks(headers);
 
             setAllTime(long_term);
             setSixMonth(medium_term);

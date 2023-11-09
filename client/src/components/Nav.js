@@ -18,7 +18,7 @@ const Nav = () => {
             </div>
 
             <div className='flex fixed justify-center w-screen'>
-                <NavLink to='/profile' className='mx-5 flex items-center'>
+                <NavLink to='/' className='mx-5 flex items-center'>
                     <BiUser size={35}/><span className='hidden md:inline'>PROFILE</span>
                 </NavLink>
                 <NavLink to='/artists' className='mx-5 flex items-center'>
