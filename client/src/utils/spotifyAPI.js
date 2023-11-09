@@ -10,17 +10,17 @@ const storeTokenTime = () => window.localStorage.setItem('spotifyTokenTime', get
 
 const getLocalAccessToken = () => window.localStorage.getItem('spotifyAccessToken');
 const getRefreshToken = () => window.localStorage.getItem('spotifyRefreshToken');
-const getTokenTime = () => window.localStorage.getItem('spotifyTokenTime');
+const getTokenTime = () => parseInt(window.localStorage.getItem('spotifyTokenTime'));
 
 const spotifyAPI = 'https://api.spotify.com/v1';
-
 const refreshAccessToken = async () => {
     try {
-        const {token} = await axios.get(`${serverURI}/refresh_token?refresh_token=${getRefreshToken()}`);
-        storeAccessToken(token);
-        storeTokenTime(getTimestampInSeconds());
-        window.location.reload();
-        return;
+        await axios.get(`${serverURI}/refresh_token?refresh_token=${getRefreshToken()}`).then((res) => {
+            console.log('new access token > ',res.data);
+            storeAccessToken(res.data);
+            storeTokenTime();
+            window.location.reload();
+        });
     } catch(err) {
         console.error(err);
     } 
@@ -38,10 +38,20 @@ export const getAccessToken = () => {
     let token = getLocalAccessToken();
 
     if((token === 'undefined' || token === null)  && access_token) {
+        console.log('STORE ACCESS TOKEN');
         storeAccessToken(access_token);
-        storeTokenTime(getTimestampInSeconds());
+        storeTokenTime();
         storeRefreshToken(refresh_token);
+
+        console.log('access token > ', access_token);
+        console.log('token time > ', getTokenTime());
+        console.log('refresh token > ', refresh_token);
     }
+
+
+    // console.log(getTimestampInSeconds() >= getTokenTime() + expire_time);
+    // console.log(getTimestampInSeconds());
+    // console.log(getTokenTime() + expire_time);
 
     if(getTimestampInSeconds() >= getTokenTime() + expire_time) {
         console.log('EXPIRED!!!');
@@ -53,7 +63,7 @@ export const getAccessToken = () => {
 
 export const logout = () => {
     window.localStorage.clear();
-    // window.location.reload();
+    window.location.reload();
 }
 
 const getHeaders = () => ({
