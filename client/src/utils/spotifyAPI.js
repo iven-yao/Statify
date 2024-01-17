@@ -43,9 +43,9 @@ export const getAccessToken = () => {
         storeTokenTime();
         storeRefreshToken(refresh_token);
 
-        console.log('access token > ', access_token);
-        console.log('token time > ', getTokenTime());
-        console.log('refresh token > ', refresh_token);
+        // console.log('access token > ', access_token);
+        // console.log('token time > ', getTokenTime());
+        // console.log('refresh token > ', refresh_token);
     }
 
 
@@ -100,8 +100,8 @@ export const getTopArtists = async(headers, limit=50) => (
     )
 );
 
-export const getTopTracks = async(headers) => (
-    axios.all([getTop('tracks','long_term',headers), getTop('tracks','medium_term',headers), getTop('tracks','short_term',headers)])
+export const getTopTracks = async(headers, limit=50) => (
+    axios.all([getTop('tracks','long_term',headers, limit), getTop('tracks','medium_term',headers, limit), getTop('tracks','short_term',headers, limit)])
     .then( axios.spread((long, mid, short) => ({
                 long_term: long.data,
                 medium_term: mid.data,
