@@ -78,10 +78,10 @@ export const getProfile = async (headers) => {
     return await axios.get(url, {headers});
 }
 
-const getTop = async (type, time_range, headers) => {
+const getTop = async (type, time_range, headers, limit=50) => {
     let url = `${spotifyAPI}/me/top/${type}?${querystring.stringify({
         time_range: time_range,
-        limit: 50
+        limit: limit
     })}`;
     return await axios.get(url, {headers})
         .catch(err=> {
@@ -89,8 +89,8 @@ const getTop = async (type, time_range, headers) => {
         });
 }
 
-export const getTopArtists = async(headers) => (
-    axios.all([getTop('artists','long_term',headers), getTop('artists','medium_term',headers), getTop('artists','short_term',headers)])
+export const getTopArtists = async(headers, limit=50) => (
+    axios.all([getTop('artists','long_term',headers, limit), getTop('artists','medium_term',headers, limit), getTop('artists','short_term',headers, limit)])
     .then( axios.spread((long, mid, short) => ({
                 long_term: long.data,
                 medium_term: mid.data,

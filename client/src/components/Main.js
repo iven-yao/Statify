@@ -6,20 +6,16 @@ import TopArtists from "./TopArtists";
 import TopTracks from "./TopTracks";
 
 const Main = () => {
-
     return (
         <>
-            
             <BrowserRouter>
                 <Nav/>
-                <Routes>
-                    <Route path="/" element={<Profile />} />
-                    <Route path="/artists" element={<TopArtists/>} />
-                    <Route path="/tracks" element={<TopTracks/>} />
-                </Routes>
-                
+                    <Routes>
+                        <Route path="/" element={<Profile />} />
+                        <Route path="/artists" element={<TopArtists/>} />
+                        <Route path="/tracks" element={<TopTracks/>} />
+                    </Routes>
             </BrowserRouter>
-            
         </>
     );
 }

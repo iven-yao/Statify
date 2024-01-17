@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { RxDotFilled} from "react-icons/rx";
 import Loading from "./Loading";
 import { getProfile, logout, getHeaders } from "../utils/spotifyAPI";
-import { getUesrs, createUser, updateUser} from "../utils/db";
+// import { getUesrs, createUser, updateUser} from "../utils/db";
 
 const Profile = () => {
 
@@ -12,17 +12,16 @@ const Profile = () => {
         const fetch = async() => {
             const headers = getHeaders();
             const res = await getProfile(headers);
-            // check user existence, create new user
-            const data = await getUesrs({spotify_id:res.data['id']});
-            // console.log(data);
-            if(!data.user.length) {
-                // create new user
-                await createUser(res.data).then((id) => console.log(id));
-            } else {
-                // update existing user
-                const userid = data.user[0].id;
-                updateUser(userid, res.data);
-            }
+            // check user existence, create new user, no db needed for now
+            // const data = await getUesrs({spotify_id:res.data['id']});
+            // if(!data.user.length) {
+            //     // create new user
+            //     await createUser(res.data).then((id) => console.log(id));
+            // } else {
+            //     // update existing user
+            //     const userid = data.user[0].id;
+            //     updateUser(userid, res.data);
+            // }
 
             setProfile(res.data);
         };

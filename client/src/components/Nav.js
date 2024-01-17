@@ -18,13 +18,13 @@ const Nav = () => {
             </div>
 
             <div className='flex fixed justify-center w-screen'>
-                <NavLink to='/' className='mx-5 flex items-center'>
+                <NavLink to='/' className='mx-5 flex items-center hover:text-green-500'>
                     <BiUser size={35}/><span className='hidden md:inline'>PROFILE</span>
                 </NavLink>
-                <NavLink to='/artists' className='mx-5 flex items-center'>
+                <NavLink to='/artists' className='mx-5 flex items-center hover:text-green-500'>
                     <BiMicrophone size={35}/><span className='hidden md:inline'>ARTISTS</span>
                 </NavLink>    
-                <NavLink to='/tracks' className='mx-5 flex items-center'>
+                <NavLink to='/tracks' className='mx-5 flex items-center hover:text-green-500'>
                     <BiMusic size={35}/><span className='hidden md:inline'>TRACKS</span>
                 </NavLink>      
             </div>
