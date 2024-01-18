@@ -12,7 +12,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetch = async() => {
             const headers = getHeaders();
-            const data = await Promise.all([getTopArtists(headers, 5), getTopTracks(headers, 5)]);
+            const data = await Promise.all([getTopArtists(headers, 50), getTopTracks(headers, 50)]);
             
             setAllTime(data[0].long_term);
             setFourWeek(data[0].short_term);
@@ -46,7 +46,7 @@ const Dashboard = () => {
                 <div className="border-r border-t border-green-500 rounded-xl p-4 m-2">
                     <div className="text-lg m-2 font-bold">All-time Favorite Tracks</div>
                     <div className="flex flex-col">
-                        {allTimeTrack.items.map((item, index) => (
+                        {allTimeTrack.items.slice(0,5).map((item, index) => (
                             <div key={item.id} className="flex flex-row align-text-bottom justify-between border-t border-gray-500 p-2">
                                 <div>{item.name}</div>
                                 <div className="truncate text-gray-400">
@@ -73,7 +73,7 @@ const Dashboard = () => {
                 <div className="border-r border-t border-green-500 rounded-xl p-4 m-2">
                     <div className="text-lg m-2 font-bold">Recent Favorite Tracks </div>
                     <div className="flex flex-col">
-                        {fourWeekTrack.items.map((item, index) => (
+                        {fourWeekTrack.items.slice(0,5).map((item, index) => (
                             <div key={item.id} className="flex flex-row align-text-bottom justify-between border-t border-gray-500 p-2">
                                 <div>{item.name}</div>
                                 <div className="truncate text-gray-400">

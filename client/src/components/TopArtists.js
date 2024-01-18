@@ -43,7 +43,7 @@ const TopArtists = () => {
         {fourWeek&&sixMonth&&allTime? 
             <div className="col-span-3 grid grid-cols-1 p-12 md:grid-cols-2 overflow-y-scroll overflow-y-hidden">
                 <div className="p-2" id="alltime_chart">
-                    <div className="flex items-center justify-between text-xl p-2">
+                    <div className="flex items-center justify-between text-xl p-2 truncate">
                         TOP 50 ARTISTS ALL TIME
                     </div>
                     <div className="flex flex-col border-2 border-green-500 rounded-xl p-2">
@@ -63,7 +63,7 @@ const TopArtists = () => {
                     </div>
                 </div>
                 <div className="p-2" id="month_chart">
-                    <div className="flex items-center justify-between text-xl p-2">
+                    <div className="flex items-center justify-between text-xl p-2 truncate">
                         <span className="truncate">TOP 50 ARTISTS THIS MONTH</span>
                         <span title={explaination} className="px-2"><BsQuestionCircleFill/></span>
                     </div>
