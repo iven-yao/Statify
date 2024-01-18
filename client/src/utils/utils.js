@@ -18,3 +18,9 @@ export const getHashParams = () => {
 export const getTimestampInSeconds = () => {
     return Math.floor(Date.now() / 1000);
 }
+
+export const delay = (milliseconds) => {
+    return new Promise(resolve => {
+        setTimeout(resolve, milliseconds);
+    });
+}
