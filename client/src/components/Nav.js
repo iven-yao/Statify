@@ -2,13 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import StatifyPNG from '../assets/statify.png';
 import { BiUser, BiMusic, BiMicrophone } from 'react-icons/bi';
+import { LuLayoutDashboard } from "react-icons/lu";
 import { BsGithub} from 'react-icons/bs';
 
 const Nav = () => {
 
     return (
         <nav className='fixed bottom-0 bg-black w-screen items-center justify-between flex'>
-            
             <div className="flex items-center pl-5">
                 <img src={StatifyPNG} width='35' className="rounded-full m-2 aspect-square" alt="profile pic"/> 
                 <div className='md:inline hidden'>
@@ -19,7 +19,7 @@ const Nav = () => {
 
             <div className='flex fixed justify-center w-screen'>
                 <NavLink to='/' className='mx-5 flex items-center hover:text-green-500'>
-                    <BiUser size={35}/><span className='hidden md:inline'>PROFILE</span>
+                    <LuLayoutDashboard size={35}/><span className='hidden md:inline'>DASHBOARD</span>
                 </NavLink>
                 <NavLink to='/artists' className='mx-5 flex items-center hover:text-green-500'>
                     <BiMicrophone size={35}/><span className='hidden md:inline'>ARTISTS</span>

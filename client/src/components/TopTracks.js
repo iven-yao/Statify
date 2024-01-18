@@ -42,7 +42,7 @@ const TopTracks = () => {
     return (
         <>
         {fourWeek&&sixMonth&&allTime? 
-            <div className="grid grid-cols-1 p-12 md:grid-cols-2">
+            <div className="col-span-3 grid grid-cols-1 p-12 md:grid-cols-2 overflow-y-scroll overflow-y-hidden">
                 <div className="p-2" id="alltime_chart">
                     <div className="flex items-center justify-between text-xl p-2">
                         TOP 50 TRACKS ALL TIME
@@ -111,7 +111,9 @@ const TopTracks = () => {
                 </div>
             </div>
             :
-            <Loading/>
+            <div className="col-span-3 p-12">
+                <Loading/>
+            </div>
         }
         </>
     );
