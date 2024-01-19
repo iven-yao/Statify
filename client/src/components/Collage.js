@@ -33,7 +33,7 @@ const Collage = () => {
         <>
         {artistsData?
             <div className="col-span-3 flex flex-col px-12 md:pb-12 lg:my-auto lg:pb-0">
-                <NavLink to='/' className="absolute right-10 bg-black rounded-full"><IoMdCloseCircleOutline size={35} className="text-white"/></NavLink>
+                <NavLink to='/' className="absolute right-10 bg-[--black] rounded-full"><IoMdCloseCircleOutline size={35} className="text-white"/></NavLink>
                 <div className="border-x border-green-500 rounded-xl px-10 py-4 m-2 grid grid-cols-1 md:grid-cols-8">
                     <div className="md:col-span-3 grid grid-cols-2 md:grid-cols-2">
                         {artistsData.items.slice(0,4).map((item) =>
