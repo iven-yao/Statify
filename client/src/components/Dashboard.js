@@ -49,7 +49,10 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="border-r border-t border-green-500 rounded-xl p-4 m-2">
-                    <div className="text-lg m-2 font-bold">All-time Favorite Tracks</div>
+                    <div className="text-lg m-2 font-bold flex justify-between">
+                        <div>All-time Favorite Tracks</div>
+                        <NavLink to='/topchart' className="text-gray-500 flex items-center"><MdOutlineKeyboardDoubleArrowRight/>MORE</NavLink>
+                    </div>
                     <div className="flex flex-col">
                         {allTimeTrack.items.slice(0,5).map((item, index) => (
                             <div key={item.id} className="flex flex-row align-text-bottom justify-between border-t border-gray-500 p-2">
@@ -79,7 +82,10 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="border-r border-t border-green-500 rounded-xl p-4 m-2">
-                    <div className="text-lg m-2 font-bold">Recent Favorite Tracks </div>
+                    <div className="text-lg m-2 font-bold flex justify-between">
+                        <div>Recent Favorite Tracks</div> 
+                        <NavLink to='/topchart' className="text-gray-500 flex items-center"><MdOutlineKeyboardDoubleArrowRight/>MORE</NavLink>
+                    </div>
                     <div className="flex flex-col">
                         {fourWeekTrack.items.slice(0,5).map((item, index) => (
                             <div key={item.id} className="flex flex-row align-text-bottom justify-between border-t border-gray-500 p-2">
