@@ -41,11 +41,9 @@ const Main = () => {
                         <Nav />
                             <Routes>
                                 <Route path="/" element={<Dashboard />} />
-                                <Route path="/artists" element={<TopArtists/>} />
-                                <Route path="/tracks" element={<TopTracks/>} />
                                 <Route path="/analysis" element={<Analysis />} />
                                 <Route path="/collage" element={<Collage />} />
-                                <Route path="/test" element={<TopCharts />} />
+                                <Route path="/topchart" element={<TopCharts />} />
                             </Routes>
                     </BrowserRouter>
                 </div>

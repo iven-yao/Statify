@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import StatifyPNG from '../assets/statify.png';
-import { BiMusic, BiMicrophone } from 'react-icons/bi';
+import { FaListOl } from "react-icons/fa";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FaChartPie } from "react-icons/fa";
 import { BsGithub} from 'react-icons/bs';
@@ -21,19 +21,16 @@ const Nav = () => {
 
             <div className='flex fixed justify-center w-screen'>
                 <NavLink to='/' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
-                    <LuLayoutDashboard size={25}/><span className='hidden md:inline'>DASHBOARD</span>
+                    <LuLayoutDashboard size={25}/><div className='hidden md:inline pl-1'>DASHBOARD</div>
                 </NavLink>
-                <NavLink to='/artists' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
-                    <BiMicrophone size={25}/><span className='hidden md:inline'>ARTISTS</span>
-                </NavLink>    
-                <NavLink to='/tracks' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
-                    <BiMusic size={25}/><span className='hidden md:inline'>TRACKS</span>
+                <NavLink to='/topchart' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
+                    <FaListOl size={25}/><div className='hidden md:inline pl-1'>TOPCHART</div>
                 </NavLink>
                 <NavLink to='/analysis' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
-                    <FaChartPie size={25}/><span className='hidden md:inline'>ANALYSIS</span>
+                    <FaChartPie size={25}/><div className='hidden md:inline pl-1'>ANALYSIS</div>
                 </NavLink>
                 <NavLink to='/test' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
-                    <IoIosConstruct size={25}/><span className='hidden md:inline'>TEST</span>
+                    <IoIosConstruct size={25}/><div className='hidden md:inline pl-1'>TEST</div>
                 </NavLink>
             </div>
 

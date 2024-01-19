@@ -6,6 +6,9 @@ import {BsQuestionCircleFill} from "react-icons/bs";
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import Loading from "./Loading";
 import { getTopTracks, getHeaders } from "../utils/spotifyAPI";
+import { HiSwitchVertical } from "react-icons/hi";
+import { AllTimeTopTracks, RecentTopTracks } from "./TopTracks";
+import { AllTimeTopArtists, RecentTopArtists } from "./TopArtists";
 
 const TopCharts = () => {
     
@@ -14,6 +17,7 @@ const TopCharts = () => {
     const [sixMonthMap, setSixMonthMap] = useState();
     const [fourWeek, setFourWeek] = useState();
     const [chartLen, setChartLen] = useState(10);
+    const [chartType, setChartType] = useState("ARTISTS");
 
     const showMore = () => {
         setChartLen(50);
@@ -21,6 +25,11 @@ const TopCharts = () => {
 
     const showLess = () => {
         setChartLen(10);
+    }
+
+    const switchType = () => {
+        if(chartType === 'ARTISTS') setChartType('TRACKS');
+        else setChartType('ARTISTS');
     }
 
     const buildMap = (map, data) => {
@@ -54,72 +63,23 @@ const TopCharts = () => {
         {fourWeek&&sixMonth&&allTime? 
             <div className="col-span-3 grid grid-cols-1 px-12 pt-6 pb-12 md:grid-cols-2">
                 <div className="p-2" id="alltime_chart">
-                    <div className="flex items-center justify-between text-xl p-2 truncate">
-                        TOP {chartLen} TRACKS ALL TIME
+                    <div className="flex items-center justify-start text-xl px-2 truncate">
+                        TOP {chartLen} <button className="flex px-2 pt-1 rounded-t-xl bg-green-500 mx-2 items-center" onClick={switchType}>{chartType}<HiSwitchVertical/></button> ALL TIME
                     </div>
-                    <div className="flex flex-col border-2 border-green-500 rounded-xl p-2">
-                    {allTime.items.slice(0,chartLen).map((item, index)=>{
-                        return (
-                            <div className={`flex items-center p-1 justify-between ${index !== 0? 'border-t border-gray-500 ':''}`} key={index}>
-                                <div className="flex flex-row truncate">
-                                    <img src={item.album.images[0].url} className="mr-5 aspect-square w-11 object-cover" alt="track_img"/>
-                                    <div className="flex flex-col justify-between">
-                                        <div className="truncate">{item.name}</div>
-                                        <div className="truncate text-gray-400 text-xs">
-                                        {item.artists.map((artist, index) => {
-                                            return index === 0? artist.name: ', '+artist.name;
-                                        })}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="ml-5 flex">
-                                    <div>{index+1}</div>
-                                </div>
-                            </div>
-                        );
-                    })}
-                    </div>
+                    {chartType === 'TRACKS' && <AllTimeTopTracks len={chartLen} />}
+                    {chartType === 'ARTISTS' && <AllTimeTopArtists len={chartLen} />}
                 </div>
                 <div className="p-2" id="month_chart">
-                    <div className="flex items-center justify-between text-xl p-2 truncate">
-                        <span className="truncate">TOP {chartLen} TRACKS THIS MONTH</span>
+                    <div className="flex items-center justify-start text-xl px-2 truncate">
+                        <span className="flex truncate">
+                            TOP {chartLen} <button className="flex px-2 pt-1 rounded-t-xl bg-green-500 mx-2 items-center" onClick={switchType}>{chartType}<HiSwitchVertical/></button> THIS MONTH
+                        </span>
                         <span title={explaination} className="px-2"><BsQuestionCircleFill/></span>
                     </div>
-                    <div className="flex flex-col border-2 border-green-500 rounded-xl p-2">
-                    {fourWeek.items.slice(0, chartLen).map((item, index)=>{
-                        return (
-                            <div className={`flex items-center p-1 justify-between ${index !== 0? 'border-t border-gray-500 ':''}`} key={index}>
-                                <div className="flex flex-row truncate">
-                                    <img src={item.album.images[0].url} className="mr-5 aspect-square w-11 object-cover" alt="track_img"/>
-                                    <div className="flex flex-col justify-between">
-                                        <div className="truncate">{item.name}</div>
-                                        <div className="truncate text-gray-400 text-xs">
-                                            {item.artists.map((artist, index) => {
-                                                return index === 0? artist.name: ', '+artist.name;
-                                            })}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="ml-5 flex">
-                                    <div>{index+1}</div>
-                                    <div className="ml-5 items-center flex">
-                                    {
-                                        check(item.uri) === undefined? 
-                                            <MdFiberNew/> : 
-                                        check(item.uri) === index+1? 
-                                            <TiEquals/>: 
-                                        check(item.uri) > index+1? 
-                                            <span className="text-green-500"><TiArrowSortedUp/></span>:
-                                            <span className="text-red-500"><TiArrowSortedDown/></span>
-                                    }
-                                    </div>
-                                </div>
-                            </div>
-                        );
-                    })}
-                    </div>
+                    {chartType === 'TRACKS' && <RecentTopTracks len={chartLen} />}
+                    {chartType === 'ARTISTS' && <RecentTopArtists len={chartLen} />}
                 </div>
-                <div className="col-span-2 flex items-center justify-center pb-2">
+                <div className="md:col-span-2 flex items-center justify-center pb-2">
                     {chartLen === 50?
                         <CiCircleMinus size={35} title="Show Less" onClick={showLess} className="cursor-pointer"/>
                         :
