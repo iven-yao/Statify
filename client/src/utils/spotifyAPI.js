@@ -117,14 +117,14 @@ export const getTopArtists = async(headers, limit=50) => {
             })
         );
     } else {
-        await delay(250);
+        // await delay(250);
     }
 
-    console.log({
-        long_term: JSON.parse(getLongTermArtists()),
-        medium_term: JSON.parse(getMidTermArtists()),
-        short_term: JSON.parse(getShortTermArtists())
-    });
+    // console.log({
+    //     long_term: JSON.parse(getLongTermArtists()),
+    //     medium_term: JSON.parse(getMidTermArtists()),
+    //     short_term: JSON.parse(getShortTermArtists())
+    // });
 
     return ({
         long_term: JSON.parse(getLongTermArtists()),
@@ -145,7 +145,7 @@ export const getTopTracks = async(headers, limit=50) => {
             })
         );
     } else {
-        await delay(500);
+        // await delay(500);
     }
 
     return ({

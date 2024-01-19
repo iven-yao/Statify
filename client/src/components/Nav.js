@@ -29,8 +29,8 @@ const Nav = () => {
                 <NavLink to='/tracks' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
                     <BiMusic size={25}/><span className='hidden md:inline'>TRACKS</span>
                 </NavLink>
-                <NavLink to='/stats' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
-                    <FaChartPie size={25}/><span className='hidden md:inline'>STATS</span>
+                <NavLink to='/analysis' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
+                    <FaChartPie size={25}/><span className='hidden md:inline'>ANALYSIS</span>
                 </NavLink>
                 <NavLink to='/test' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
                     <IoIosConstruct size={25}/><span className='hidden md:inline'>TEST</span>

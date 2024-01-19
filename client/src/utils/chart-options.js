@@ -19,3 +19,6 @@ export const options = {
       }
     },
   };
+
+export const activeButton = "rounded-t-lg bg-green-500 p-2";
+export const inActiveButton = "p-2 rounded-t-lg border-green-500 border";
