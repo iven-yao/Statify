@@ -3,6 +3,7 @@ import { explaination } from "../utils/utils";
 import {MdFiberNew} from "react-icons/md";
 import {TiArrowSortedDown, TiArrowSortedUp, TiEquals} from "react-icons/ti";
 import {BsQuestionCircleFill} from "react-icons/bs";
+import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import Loading from "./Loading";
 import { getTopTracks, getHeaders } from "../utils/spotifyAPI";
 
@@ -12,6 +13,15 @@ const TopTracks = () => {
     const [sixMonth, setSixMonth] = useState();
     const [sixMonthMap, setSixMonthMap] = useState();
     const [fourWeek, setFourWeek] = useState();
+    const [chartLen, setChartLen] = useState(10);
+
+    const showMore = () => {
+        setChartLen(50);
+    }
+
+    const showLess = () => {
+        setChartLen(10);
+    }
 
     const buildMap = (map, data) => {
         data.items.map((item, index)=>map.set(item.uri, index+1));
@@ -42,17 +52,17 @@ const TopTracks = () => {
     return (
         <>
         {fourWeek&&sixMonth&&allTime? 
-            <div className="col-span-3 grid grid-cols-1 p-12 md:grid-cols-2 overflow-y-scroll overflow-y-hidden">
+            <div className="col-span-3 grid grid-cols-1 px-12 pt-6 pb-12 md:grid-cols-2">
                 <div className="p-2" id="alltime_chart">
                     <div className="flex items-center justify-between text-xl p-2 truncate">
-                        TOP 50 TRACKS ALL TIME
+                        TOP {chartLen} TRACKS ALL TIME
                     </div>
                     <div className="flex flex-col border-2 border-green-500 rounded-xl p-2">
-                    {allTime.items.map((item, index)=>{
+                    {allTime.items.slice(0,chartLen).map((item, index)=>{
                         return (
-                            <div className={`flex items-center p-2 justify-between ${index !== 0? 'border-t border-gray-500 ':''}`} key={index}>
+                            <div className={`flex items-center p-1 justify-between ${index !== 0? 'border-t border-gray-500 ':''}`} key={index}>
                                 <div className="flex flex-row truncate">
-                                    <img src={item.album.images[0].url} className="mr-5 aspect-square w-12 object-cover" alt="track_img"/>
+                                    <img src={item.album.images[0].url} className="mr-5 aspect-square w-11 object-cover" alt="track_img"/>
                                     <div className="flex flex-col justify-between">
                                         <div className="truncate">{item.name}</div>
                                         <div className="truncate text-gray-400 text-xs">
@@ -72,15 +82,15 @@ const TopTracks = () => {
                 </div>
                 <div className="p-2" id="month_chart">
                     <div className="flex items-center justify-between text-xl p-2 truncate">
-                        <span className="truncate">TOP 50 TRACKS THIS MONTH</span>
+                        <span className="truncate">TOP {chartLen} TRACKS THIS MONTH</span>
                         <span title={explaination} className="px-2"><BsQuestionCircleFill/></span>
                     </div>
                     <div className="flex flex-col border-2 border-green-500 rounded-xl p-2">
-                    {fourWeek.items.map((item, index)=>{
+                    {fourWeek.items.slice(0, chartLen).map((item, index)=>{
                         return (
-                            <div className={`flex items-center p-2 justify-between ${index !== 0? 'border-t border-gray-500 ':''}`} key={index}>
+                            <div className={`flex items-center p-1 justify-between ${index !== 0? 'border-t border-gray-500 ':''}`} key={index}>
                                 <div className="flex flex-row truncate">
-                                    <img src={item.album.images[0].url} className="mr-5 aspect-square w-12 object-cover" alt="track_img"/>
+                                    <img src={item.album.images[0].url} className="mr-5 aspect-square w-11 object-cover" alt="track_img"/>
                                     <div className="flex flex-col justify-between">
                                         <div className="truncate">{item.name}</div>
                                         <div className="truncate text-gray-400 text-xs">
@@ -108,6 +118,13 @@ const TopTracks = () => {
                         );
                     })}
                     </div>
+                </div>
+                <div className="col-span-2 flex items-center justify-center pb-2">
+                    {chartLen === 50?
+                        <CiCircleMinus size={35} title="Show Less" onClick={showLess} className="cursor-pointer"/>
+                        :
+                        <CiCirclePlus size={35} title="Show More" onClick={showMore} className="cursor-pointer"/>
+                    }
                 </div>
             </div>
             :
