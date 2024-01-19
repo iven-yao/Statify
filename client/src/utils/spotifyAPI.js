@@ -117,7 +117,7 @@ export const getTopArtists = async(headers, limit=50) => {
             })
         );
     } else {
-        await delay(500);
+        await delay(250);
     }
 
     console.log({
