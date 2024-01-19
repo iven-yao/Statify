@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import StatifyPNG from '../assets/statify.png';
-import { BiUser, BiMusic, BiMicrophone } from 'react-icons/bi';
+import { BiMusic, BiMicrophone } from 'react-icons/bi';
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FaChartPie } from "react-icons/fa";
 import { BsGithub} from 'react-icons/bs';
+import { IoIosConstruct } from "react-icons/io";
 
 const Nav = () => {
 
@@ -30,6 +31,9 @@ const Nav = () => {
                 </NavLink>
                 <NavLink to='/stats' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
                     <FaChartPie size={25}/><span className='hidden md:inline'>STATS</span>
+                </NavLink>
+                <NavLink to='/test' className='mx-2 md:mx-5 flex items-center hover:text-green-500'>
+                    <IoIosConstruct size={25}/><span className='hidden md:inline'>TEST</span>
                 </NavLink>
             </div>
 
