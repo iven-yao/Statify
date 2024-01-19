@@ -202,7 +202,7 @@ const Analysis = () => {
                     {chartType === 'genre' && <Doughnut data={chartData} options={options}/>}
                     {chartType === 'pop' && <Doughnut data={chartData} options={options}/>}
                     <div className="flex">
-                        <button className={chartType==='genre'?activeButton:inActiveButton} onClick={setGenre}>Genre Analysis</button>
+                        <button className={chartType==='genre'?activeButton:inActiveButton} onClick={setGenre}>Genre</button>
                         <button className={chartType==='pop'?activeButton:inActiveButton} onClick={setPop}>Popularity</button>
                     </div>
                 </div>
