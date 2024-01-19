@@ -28,7 +28,7 @@ const Collage = () => {
             console.error(err);
             logout();
         });
-    },[]);
+    },[location.state.period]);
     return (
         <>
         {artistsData?
