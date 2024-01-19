@@ -1,5 +1,5 @@
 import axios from 'axios';
-const {getHashParams, getTimestampInSeconds, serverURI, delay} = require('./utils');
+const {getHashParams, getTimestampInSeconds, serverURI} = require('./utils');
 const querystring = require('querystring');
 
 let expire_time = 3600;
@@ -119,12 +119,6 @@ export const getTopArtists = async(headers, limit=50) => {
     } else {
         // await delay(250);
     }
-
-    // console.log({
-    //     long_term: JSON.parse(getLongTermArtists()),
-    //     medium_term: JSON.parse(getMidTermArtists()),
-    //     short_term: JSON.parse(getShortTermArtists())
-    // });
 
     return ({
         long_term: JSON.parse(getLongTermArtists()),

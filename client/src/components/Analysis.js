@@ -12,9 +12,9 @@ const Analysis = () => {
     const [genreSixMonth, setGenreSixMonth] = useState(new Map());
     const [genreFourWeek, setGenreFourWeek] = useState(new Map());
 
-    const [popAllTime, setPopAllTime] = useState();
-    const [popSixMonth, setPopSixMonth] = useState();
-    const [popFourWeek, setPopFourWeek] = useState();
+    // const [popAllTime, setPopAllTime] = useState();
+    // const [popSixMonth, setPopSixMonth] = useState();
+    // const [popFourWeek, setPopFourWeek] = useState();
 
     const [chartData, setChartData] = useState();
     const [period, setPeriod] = useState("all");
@@ -26,14 +26,14 @@ const Analysis = () => {
     const nextState = () => {
         const curr = periods.indexOf(period);
         const len = periods.length;
-        let next = curr+1 == len? 0: curr+1;
+        let next = curr+1 === len? 0: curr+1;
         setPeriod(periods[next]);
     }
 
     const prevState = () => {
         const curr = periods.indexOf(period);
         const len = periods.length;
-        let prev = curr-1 == -1? len-1: curr-1;
+        let prev = curr-1 === -1? len-1: curr-1;
         setPeriod(periods[prev]);
     }
 
@@ -72,13 +72,13 @@ const Analysis = () => {
         return map;
     }
 
-    const buildPopArr = (arr, data) => {
-        data.items.forEach((item) => {
-            arr[item.popularity-1]++;
-        })
+    // const buildPopArr = (arr, data) => {
+    //     data.items.forEach((item) => {
+    //         arr[item.popularity-1]++;
+    //     })
 
-        return arr;
-    }
+    //     return arr;
+    // }
 
     useEffect(() => {
         const fetch = async() => {
@@ -91,9 +91,9 @@ const Analysis = () => {
             setGenreFourWeek(buildGenreMap(new Map(), data[0].short_term));
 
             // pop arr
-            setPopAllTime(buildPopArr(new Array(100).fill(0), data[0].long_term));
-            setPopSixMonth(buildPopArr(new Array(100).fill(0), data[0].medium_term));
-            setPopFourWeek(buildPopArr(new Array(100).fill(0), data[0].short_term));            
+            // setPopAllTime(buildPopArr(new Array(100).fill(0), data[0].long_term));
+            // setPopSixMonth(buildPopArr(new Array(100).fill(0), data[0].medium_term));
+            // setPopFourWeek(buildPopArr(new Array(100).fill(0), data[0].short_term));            
         };
 
         fetch().catch(err => {
@@ -110,7 +110,7 @@ const Analysis = () => {
                 case 'all':
                     if(genreAllTime.size > 0) {
                         alltimeGenre = [...genreAllTime.entries()].filter((entry)=>entry[1] >1).sort((a, b) => b[1] - a[1]);
-                        let othera = [...genreAllTime.entries()].filter((entry) => entry[1] == 1);
+                        let othera = [...genreAllTime.entries()].filter((entry) => entry[1] === 1);
                         alltimeGenre.push(['others', othera.length]);
                     }
                     if(alltimeGenre.length > 0){
@@ -121,7 +121,7 @@ const Analysis = () => {
                 case '6m':
                     if(genreSixMonth.size > 0) {
                         sixmonthGenre = [...genreSixMonth.entries()].filter((entry)=>entry[1] >1).sort((a, b) => b[1] - a[1]);
-                        let other6 = [...genreSixMonth.entries()].filter((entry) => entry[1] == 1);
+                        let other6 = [...genreSixMonth.entries()].filter((entry) => entry[1] === 1);
                         sixmonthGenre.push(['others', other6.length]);
                     }
                     if(sixmonthGenre.length > 0) {
@@ -132,13 +132,15 @@ const Analysis = () => {
                 case '4w':
                     if(genreFourWeek.size > 0) {
                         fourweekGenre = [...genreFourWeek.entries()].filter((entry)=>entry[1] >1).sort((a, b) => b[1] - a[1]);
-                        let other4 = [...genreFourWeek.entries()].filter((entry) => entry[1] == 1);
+                        let other4 = [...genreFourWeek.entries()].filter((entry) => entry[1] === 1);
                         fourweekGenre.push(['others', other4.length]);
                     }
                     if(fourweekGenre.length > 0) {
                         setChartData(buildGenreChartData(new Map(fourweekGenre)));
                         setTitle("Recent Genre");
                     }
+                    break;
+                default:
                     break;
             }
         // Popularity
@@ -148,7 +150,7 @@ const Analysis = () => {
                 case 'all':
                     if(genreAllTime.size > 0) {
                         alltimePop = [...genreAllTime.entries()].filter((entry)=>entry[1] >1).sort((a, b) => b[1] - a[1]);
-                        let othera = [...genreAllTime.entries()].filter((entry) => entry[1] == 1);
+                        let othera = [...genreAllTime.entries()].filter((entry) => entry[1] === 1);
                         alltimePop.push(['others', othera.length]);
                     }
                     if(alltimePop.length > 0){
@@ -159,7 +161,7 @@ const Analysis = () => {
                 case '6m':
                     if(genreSixMonth.size > 0) {
                         sixmonthPop = [...genreSixMonth.entries()].filter((entry)=>entry[1] >1).sort((a, b) => b[1] - a[1]);
-                        let other6 = [...genreSixMonth.entries()].filter((entry) => entry[1] == 1);
+                        let other6 = [...genreSixMonth.entries()].filter((entry) => entry[1] === 1);
                         sixmonthPop.push(['others', other6.length]);
                     }
                     if(sixmonthPop.length > 0) {
@@ -170,13 +172,15 @@ const Analysis = () => {
                 case '4w':
                     if(genreFourWeek.size > 0) {
                         fourweekPop = [...genreFourWeek.entries()].filter((entry)=>entry[1] >1).sort((a, b) => b[1] - a[1]);
-                        let other4 = [...genreFourWeek.entries()].filter((entry) => entry[1] == 1);
+                        let other4 = [...genreFourWeek.entries()].filter((entry) => entry[1] === 1);
                         fourweekPop.push(['others', other4.length]);
                     }
                     if(fourweekPop.length > 0) {
                         setChartData(buildGenreChartData(new Map(fourweekPop)));
                         setTitle("Recent Popularity");
                     }
+                    break;
+                default:
                     break;
             }
         }
