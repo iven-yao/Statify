@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getProfile, logout, getHeaders} from "../utils/spotifyAPI";
 import Dashboard from "./Dashboard";
-import TopArtists from "./TopArtists";
-import TopTracks from "./TopTracks";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Nav from "./Nav";
 import Analysis from "./Analysis";

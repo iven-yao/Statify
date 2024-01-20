@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {explaination } from "../utils/utils";
+import {explaination } from "../../utils/utils";
 import {MdFiberNew} from "react-icons/md";
 import {TiArrowSortedDown, TiArrowSortedUp, TiEquals} from "react-icons/ti";
 import {BsQuestionCircleFill} from "react-icons/bs";
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
-import Loading from "./Loading";
-import { getHeaders, getTopArtists } from "../utils/spotifyAPI";
+import Loading from "../Loading";
+import { getHeaders, getTopArtists } from "../../utils/spotifyAPI";
 
 const TopArtists = () => {
     

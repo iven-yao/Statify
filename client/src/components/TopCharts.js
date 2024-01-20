@@ -3,8 +3,8 @@ import { explaination } from "../utils/utils";
 import {BsQuestionCircleFill} from "react-icons/bs";
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
 import { HiSwitchVertical } from "react-icons/hi";
-import { AllTimeTopTracks, RecentTopTracks } from "./TopTracks";
-import { AllTimeTopArtists, RecentTopArtists } from "./TopArtists";
+import { AllTimeTopTracks, RecentTopTracks } from "./topchart/TopTracks";
+import { AllTimeTopArtists, RecentTopArtists } from "./topchart/TopArtists";
 
 const TopCharts = () => {
     const [chartLen, setChartLen] = useState(10);
@@ -27,7 +27,7 @@ const TopCharts = () => {
         <div className="col-span-3 grid grid-cols-1 px-12 pt-6 pb-12 md:grid-cols-2">
             <div className="p-2" id="alltime_chart">
                 <div className="flex items-center justify-start text-xl px-2 truncate">
-                    TOP {chartLen} <button className="flex px-2 pt-1 rounded-t-xl bg-green-500 mx-2 items-center" onClick={switchType}>{chartType}<HiSwitchVertical/></button> ALL TIME
+                    TOP {chartLen} <button className="flex px-2 rounded-t-lg bg-green-500 mx-2 items-center" onClick={switchType}>{chartType}<HiSwitchVertical/></button> ALL TIME
                 </div>
                 {chartType === 'TRACKS' && <AllTimeTopTracks len={chartLen} />}
                 {chartType === 'ARTISTS' && <AllTimeTopArtists len={chartLen} />}
@@ -35,7 +35,7 @@ const TopCharts = () => {
             <div className="p-2" id="month_chart">
                 <div className="flex items-center justify-start text-xl px-2 truncate">
                     <span className="flex truncate">
-                        TOP {chartLen} <button className="flex px-2 pt-1 rounded-t-xl bg-green-500 mx-2 items-center" onClick={switchType}>{chartType}<HiSwitchVertical/></button> THIS MONTH
+                        TOP {chartLen} <button className="flex px-2 rounded-t-lg bg-green-500 mx-2 items-center" onClick={switchType}>{chartType}<HiSwitchVertical/></button> THIS MONTH
                     </span>
                     <span title={explaination} className="px-2"><BsQuestionCircleFill/></span>
                 </div>
