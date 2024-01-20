@@ -5,7 +5,6 @@ const cors = require('cors');
 const cookies = require('cookie-parser');
 const querystring = require('querystring');
 const request = require('request');
-const routes = require('./routes');
 const app = express();
 const PORT = process.env.PORT;
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -35,8 +34,6 @@ const spotifyVerifier = 'spotify_state';
 app.get('/', (req, res) => {
     res.send(`SPOTIFY API IS LISTENING ON PORT ${PORT}`);
 });
-
-app.use('/v1', routes);
 
 app.get('/login', (req, res) => {
     var state = generateCodeVerifier(128);
