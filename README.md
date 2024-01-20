@@ -1,7 +1,9 @@
 # Statify
 personal visualize data from your spotify<br/>
 created with Node.js, Express, React, React Router, TailwindCSS, chart.js and Spotify Api
-# https://statify-you.vercel.app/
+
+## https://statify-you.vercel.app/
+Spotify API quota extension is under review, to test the functions, [try locally](#try-locally)
 
 ## Demo
 
