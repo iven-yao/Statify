@@ -34,7 +34,7 @@ const Dashboard = () => {
         {allTime&&fourWeek&&allTimeTrack&&fourWeekTrack?
             <div className="col-span-3 flex flex-col px-12 grid grid-cols-1 md:grid-cols-2 md:py-5">
                 <div className="border-l border-b border-green-500 rounded-xl p-4 m-2">
-                    <div className="text-lg m-2 font-bold flex justify-between">
+                    <div className="text-sm md:text-lg m-2 font-bold flex justify-between">
                         <div>All-time Favorite Artists</div>
                         <NavLink to='/collage' state={{period: "all"}} className="text-gray-500 flex items-center"><MdOutlineKeyboardDoubleArrowRight/>MORE</NavLink>
                     </div>
@@ -49,15 +49,15 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="border-r border-t border-green-500 rounded-xl p-4 m-2">
-                    <div className="text-lg m-2 font-bold flex justify-between">
+                    <div className="text-sm md:text-lg m-2 font-bold flex justify-between">
                         <div>All-time Favorite Tracks</div>
                         <NavLink to='/topchart' className="text-gray-500 flex items-center"><MdOutlineKeyboardDoubleArrowRight/>MORE</NavLink>
                     </div>
                     <div className="flex flex-col">
                         {allTimeTrack.items.slice(0,5).map((item, index) => (
-                            <div key={item.id} className="flex flex-row align-text-bottom justify-between border-t border-gray-500 p-2">
+                            <div key={item.id} className="flex flex-row align-text-bottom justify-between border-t border-gray-500 p-2 grid grid-cols-1 md:grid-cols-2">
                                 <div>{item.name}</div>
-                                <div className="truncate text-gray-400">
+                                <div className="truncate text-gray-400 flex md:justify-end">
                                     {item.artists.map((artist, index) => {
                                         return index === 0? artist.name: ', '+artist.name;
                                     })}
@@ -67,7 +67,7 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="border-l border-b border-green-500 rounded-xl p-4 m-2">
-                    <div className="text-lg m-2 font-bold flex justify-between">
+                    <div className="text-sm md:text-lg m-2 font-bold flex justify-between">
                         <div>Recent Favorite Artists</div>
                         <NavLink to='/collage' state={{period: "recent"}} className="text-gray-500 flex items-center"><MdOutlineKeyboardDoubleArrowRight/>MORE</NavLink>
                     </div>
@@ -82,15 +82,15 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div className="border-r border-t border-green-500 rounded-xl p-4 m-2">
-                    <div className="text-lg m-2 font-bold flex justify-between">
+                    <div className="text-sm md:text-lg m-2 font-bold flex justify-between">
                         <div>Recent Favorite Tracks</div> 
                         <NavLink to='/topchart' className="text-gray-500 flex items-center"><MdOutlineKeyboardDoubleArrowRight/>MORE</NavLink>
                     </div>
                     <div className="flex flex-col">
                         {fourWeekTrack.items.slice(0,5).map((item, index) => (
-                            <div key={item.id} className="flex flex-row align-text-bottom justify-between border-t border-gray-500 p-2">
+                            <div key={item.id} className="flex flex-row align-text-bottom justify-between border-t border-gray-500 p-2 grid grid-cols-1 md:grid-cols-2">
                                 <div>{item.name}</div>
-                                <div className="truncate text-gray-400">
+                                <div className="truncate text-gray-400 flex md:justify-end">
                                     {item.artists.map((artist, index) => {
                                         return index === 0? artist.name: ', '+artist.name;
                                     })}

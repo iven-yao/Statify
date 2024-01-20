@@ -26,16 +26,16 @@ const TopCharts = () => {
     return (
         <div className="col-span-3 grid grid-cols-1 px-12 pt-6 pb-12 md:grid-cols-2">
             <div className="p-2" id="alltime_chart">
-                <div className="flex items-center justify-start text-xl px-2 truncate">
+                <div className="flex items-center justify-start text-sm md:text-xl px-2 truncate">
                     TOP {chartLen} <button className="flex px-2 rounded-t-lg bg-green-500 mx-2 items-center" onClick={switchType}>{chartType}<HiSwitchVertical/></button> ALL TIME
                 </div>
                 {chartType === 'TRACKS' && <AllTimeTopTracks len={chartLen} />}
                 {chartType === 'ARTISTS' && <AllTimeTopArtists len={chartLen} />}
             </div>
             <div className="p-2" id="month_chart">
-                <div className="flex items-center justify-start text-xl px-2 truncate">
+                <div className="flex items-center justify-start text-sm md:text-xl px-2 truncate">
                     <span className="flex truncate">
-                        TOP {chartLen} <button className="flex px-2 rounded-t-lg bg-green-500 mx-2 items-center" onClick={switchType}>{chartType}<HiSwitchVertical/></button> THIS MONTH
+                        TOP {chartLen} <button className="flex px-2 rounded-t-lg bg-green-500 mx-2 items-center" onClick={switchType}>{chartType}<HiSwitchVertical/></button> RECENT
                     </span>
                     <span title={explaination} className="px-2"><BsQuestionCircleFill/></span>
                 </div>
