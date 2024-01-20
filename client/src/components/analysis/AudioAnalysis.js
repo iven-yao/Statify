@@ -64,15 +64,14 @@ const AudioAnalysis = (props) => {
             setAudioAllTime(buildAudioMap(new Map(), trackFeatures[0].data));
             setAudioSixMonth(buildAudioMap(new Map(), trackFeatures[1].data));
             setAudioFourWeek(buildAudioMap(new Map(), trackFeatures[2].data));
-
-            console.log(trackFeatures);
         };
 
         fetch().catch(err => {
             console.error(err);
             logout();
         });
-    });
+         // eslint-disable-next-line
+    }, []);
 
     useEffect(() => {
             let audiolist = [];
