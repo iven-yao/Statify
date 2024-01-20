@@ -148,3 +148,11 @@ export const getTopTracks = async(headers, limit=50) => {
         short_term: JSON.parse(getShortTermTracks())
     });
 }
+
+export const getAudioFeatures = async(headers, idlist) => {
+    let url = `${spotifyAPI}/audio-features?ids=${idlist.join(',')}`;
+    return await axios.get(url, {headers})
+    .catch(err=> {
+        console.log(err);
+    });
+}
