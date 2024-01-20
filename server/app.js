@@ -32,7 +32,7 @@ const generateCodeVerifier = (len) => {
 const spotifyVerifier = 'spotify_state';
 
 app.get('/', (req, res) => {
-    res.send(`SPOTIFY API IS LISTENING ON PORT ${PORT}`);
+    res.send(`SPOTIFY API IS LISTENING`);
 });
 
 app.get('/login', (req, res) => {

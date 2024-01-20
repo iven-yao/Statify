@@ -41,7 +41,6 @@ const spotifyAPI = 'https://api.spotify.com/v1';
 const refreshAccessToken = async () => {
     try {
         await axios.get(`${serverURI}/refresh_token?refresh_token=${getRefreshToken()}`).then((res) => {
-            console.log('new access token > ',res.data);
             storeAccessToken(res.data);
             storeTokenTime();
             // window.location.href = 'http://localhost:3000';
@@ -107,7 +106,6 @@ const getTop = async (type, time_range, headers, limit=50) => {
 
 export const getTopArtists = async(headers, limit=50) => {
     if(getTimestampInSeconds() > getArtistsTime() + data_expire_time) {
-        console.log("fetching artists...");
         await Promise.all([getTop('artists','long_term',headers, limit), getTop('artists','medium_term',headers, limit), getTop('artists','short_term',headers, limit)])
         .then( axios.spread((long, mid, short) => {
                 storeLongTermArtists(long.data);
@@ -129,7 +127,6 @@ export const getTopArtists = async(headers, limit=50) => {
 
 export const getTopTracks = async(headers, limit=50) => {
     if(getTimestampInSeconds() > getTracksTime() + data_expire_time) {
-        console.log("fetching tracks...");
         await Promise.all([getTop('tracks','long_term',headers, limit), getTop('tracks','medium_term',headers, limit), getTop('tracks','short_term',headers, limit)])
         .then( axios.spread((long, mid, short) => {
                 storeLongTermTracks(long.data);
