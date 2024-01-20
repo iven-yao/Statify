@@ -5,6 +5,7 @@ import { FaListOl } from "react-icons/fa";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { FaChartPie } from "react-icons/fa";
 import { BsGithub} from 'react-icons/bs';
+/* eslint-disable no-unused-vars */
 import { IoIosConstruct } from "react-icons/io";
 
 const Nav = () => {

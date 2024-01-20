@@ -28,11 +28,6 @@ const TopArtists = () => {
         setSixMonthMap(map);
     }
 
-    const check = (artist) => {
-        var pos = sixMonthMap.get(artist);
-        return pos;
-    }
-
     useEffect(() => {
 
         const fetchData = async () => {
@@ -50,7 +45,7 @@ const TopArtists = () => {
 
     return (
         <>
-        {fourWeek&&sixMonth&&allTime? 
+        {fourWeek&&sixMonth&&allTime&&sixMonthMap? 
             <div className="col-span-3 grid grid-cols-1 px-12 pt-6 pb-12 md:grid-cols-2">
                 <div className="p-2" id="alltime_chart">
                     <div className="flex items-center justify-between text-xl p-2 truncate">
@@ -102,6 +97,7 @@ export const RecentTopArtists = (props) => {
         const fetchData = async () => {
             const headers = getHeaders();
             const data = await Promise.all([getTopArtists(headers)]);
+            /* eslint-disable no-unused-vars */
             const {long_term, medium_term, short_term} = data[0];
             buildMap(new Map(), medium_term);
             setFourWeek(short_term);
@@ -151,6 +147,7 @@ export const AllTimeTopArtists = (props) => {
     useEffect(() => {
         const fetchData = async() => {
             const headers = getHeaders();
+            /* eslint-disable no-unused-vars */
             const {long_term, medium_term, short_term} = await getTopArtists(headers);
 
             setAllTime(long_term);

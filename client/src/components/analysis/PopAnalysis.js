@@ -108,7 +108,7 @@ const PopAnalysis = (props) => {
                 default:
                     break;
             }
-    }, [popAllTime, popSixMonth, popFourWeek, period]);
+    }, [popAllTime, popSixMonth, popFourWeek, period, popAllTimeAvg, popSixMonthAvg, popFourWeekAvg]);
 
     useEffect(() => {
         setPeriod(props.prop_period);
