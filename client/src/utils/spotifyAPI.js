@@ -80,7 +80,7 @@ export const getAccessToken = () => {
 export const logout = () => {
     console.log('LOGOUT');
     window.localStorage.clear();
-    window.location.href = 'http://localhost:3000';
+    window.location.href = './';
 }
 
 export const getHeaders = () => ({
