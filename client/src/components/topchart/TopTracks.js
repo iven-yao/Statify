@@ -4,7 +4,6 @@ import {MdFiberNew} from "react-icons/md";
 import {TiArrowSortedDown, TiArrowSortedUp, TiEquals} from "react-icons/ti";
 import {BsQuestionCircleFill} from "react-icons/bs";
 import { CiCirclePlus, CiCircleMinus } from "react-icons/ci";
-import Loading from "../Loading";
 import { getTopTracks, getHeaders } from "../../utils/spotifyAPI";
 
 const TopTracks = () => {
@@ -64,7 +63,8 @@ export const RecentTopTracks = (props) => {
     useEffect(() => {
         const fetchData = async() => {
             const headers = getHeaders();
-            const {long_term, medium_term, short_term} = await getTopTracks(headers);
+            /* eslint-disable no-unused-vars */
+            const {_, medium_term, short_term} = await getTopTracks(headers);
 
             buildMap(new Map(), medium_term);
             setFourWeek(short_term);
@@ -121,6 +121,7 @@ export const AllTimeTopTracks = (props) => {
     useEffect(() => {
         const fetchData = async() => {
             const headers = getHeaders();
+            /* eslint-disable no-unused-vars */
             const {long_term, medium_term, short_term} = await getTopTracks(headers);
 
             setAllTime(long_term);

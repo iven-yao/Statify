@@ -3,9 +3,11 @@ import {SlSocialSpotify} from "react-icons/sl";
 
 const Login = () => {
 
+    const BASE_URL = process.env.REACT_APP_LOGIN_URI;
+
     return (
         <div className="App center">
-            <a className="enter-btn" href='http://localhost:9000/login'>
+            <a className="enter-btn" href={BASE_URL}>
                 <span className="front">
                     <div className="flex items-center text-center">
                         <div className="pr-1">L</div>

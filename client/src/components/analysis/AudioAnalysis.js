@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loading from "../Loading";
 import { Radar } from 'react-chartjs-2';
-import { audioColor, audioOptions } from "../../utils/chart-options";
+import { audioOptions } from "../../utils/chart-options";
 import 'chart.js/auto'
 const { getTopTracks, getHeaders, logout, getAudioFeatures } = require("../../utils/spotifyAPI");
 
@@ -72,7 +72,7 @@ const AudioAnalysis = (props) => {
             console.error(err);
             logout();
         });
-    },[]);
+    });
 
     useEffect(() => {
             let audiolist = [];
