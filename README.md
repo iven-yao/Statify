@@ -1,16 +1,15 @@
 # Statify
 personal visualize data from your spotify<br/>
-created with Express, React, Node.js, TailwindCSS
+created with Node.js, Express, React, React Router, TailwindCSS and Spotify Api
 
 ## Demo
 
-
-https://github.com/iven-yao/Statify/assets/25358966/eb719550-a399-410d-a5b7-b1111e31da29
-
+https://github.com/iven-yao/Statify/assets/25358966/dd02f761-bba1-449c-b55a-76b260a0fda7
 
 ## Try Locally
 - clone this repo
 - run `npm i` in both client and server
+- Register a Spotify App and add http://localhost:9000/callback as a Redirect URI in the app settings
 - get `CLIENT_ID` and `CLIENT_SECRET` from Spotify API, and put in `server/.env.sample` then rename it as `server/.env`
 - in server folder, run `npm run start`
 - in client folder, run `npm run start`
