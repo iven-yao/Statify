@@ -91,7 +91,6 @@ const GenreAnalysis = (props) => {
                     if(genrelist.length > 0) {
                         setChartData(buildGenreChartData(new Map(genrelist)));
                         setTopgenres(genrelist.slice(0,3).map((a)=>a[0]).join(","));
-                        console.log(genrelist);
                     }
                     break;
                 default:
