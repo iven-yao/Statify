@@ -5,7 +5,10 @@ created with Node.js, Express, React, React Router, TailwindCSS, chart.js and Sp
 
 ## Demo
 
-https://github.com/iven-yao/Statify/assets/25358966/dd02f761-bba1-449c-b55a-76b260a0fda7
+
+https://github.com/iven-yao/Statify/assets/25358966/04c9019f-ef35-49cb-b484-55727b79c7e5
+
+
 
 ## Try Locally
 - clone this repo
