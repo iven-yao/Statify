@@ -3,7 +3,9 @@ import './App.css';
 import Login from './components/Login';
 import { getAccessToken } from './utils/spotifyAPI';
 import Main from './components/Main';
+import { inject } from '@vercel/analytics';
 
+inject();
 
 const App = () => {
   const [access_token, setAccessToken] = useState();

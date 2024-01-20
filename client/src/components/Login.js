@@ -3,11 +3,11 @@ import {SlSocialSpotify} from "react-icons/sl";
 
 const Login = () => {
 
-    const BASE_URL = process.env.REACT_APP_LOGIN_URI;
+    const LOGIN_URL = process.env.REACT_APP_LOGIN_URI || 'https://statify-server.vercel.app/login';
 
     return (
         <div className="App center">
-            <a className="enter-btn" href={BASE_URL}>
+            <a className="enter-btn" href={LOGIN_URL}>
                 <span className="front">
                     <div className="flex items-center text-center">
                         <div className="pr-1">L</div>
