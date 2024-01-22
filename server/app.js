@@ -82,7 +82,7 @@ app.get('/callback', (req, res) => {
 
                 res.redirect(`${FRONTEND_URI}/#${querystring.stringify({access_token, refresh_token})}`);
             } else {
-                res.redirect(`/#${querystring.stringify({error: 'invalid_token'})}`);
+                res.redirect(`${FRONTEND_URI}`);
             }
         });
     }

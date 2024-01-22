@@ -6,6 +6,7 @@ import Nav from "./Nav";
 import Analysis from "./Analysis";
 import Collage from "./Collage";
 import TopCharts from "./TopCharts";
+import Loading from "./Loading";
 
 const Main = () => {
 
@@ -46,7 +47,9 @@ const Main = () => {
                     </BrowserRouter>
                 </div>
                 : 
-                <></>
+                <div className="h-screen">
+                    <Loading />
+                </div>
             }
             
         </>
