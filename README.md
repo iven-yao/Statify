@@ -14,10 +14,10 @@ https://github.com/iven-yao/Statify/assets/25358966/04c9019f-ef35-49cb-b484-5572
 
 ## Try Locally
 - clone this repo
-- run `npm i` in both client and server
 - Register a Spotify App and add http://localhost:9000/callback as a Redirect URI in the app settings
 - get `CLIENT_ID` and `CLIENT_SECRET` from Spotify API, and put in `server/.env.sample` then rename it as `server/.env`
-- in the root directory, run `npm run start`, it will then concurrently run server and client
+- in the root directory, run `npm run install-all` to install all dependacies in nested folders
+- then run `npm run start`, it will then concurrently run server and client
 - check out `http://localhost:3000`
 
 ## links

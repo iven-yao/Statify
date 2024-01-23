@@ -1,5 +1,6 @@
 {
   "scripts": {
+    "install-all": "npm i && cd server && npm i && cd ../client && npm i",
     "server": "npm run --prefix ./server start",
     "client": "npm run --prefix ./client start",
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
