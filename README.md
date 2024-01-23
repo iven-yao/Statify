@@ -3,7 +3,7 @@ personal visualize data from your spotify<br/>
 created with Node.js, Express, React, React Router, TailwindCSS, chart.js and Spotify Api
 
 ## https://statify-you.vercel.app/
-Spotify API quota extension is under review, to test the functions, [try locally](#try-locally)
+Spotify API quota extension is under review, in the meantime, if you want to test the functions, [try locally](#try-locally)
 
 ## Demo
 
@@ -17,8 +17,7 @@ https://github.com/iven-yao/Statify/assets/25358966/04c9019f-ef35-49cb-b484-5572
 - run `npm i` in both client and server
 - Register a Spotify App and add http://localhost:9000/callback as a Redirect URI in the app settings
 - get `CLIENT_ID` and `CLIENT_SECRET` from Spotify API, and put in `server/.env.sample` then rename it as `server/.env`
-- in server folder, run `npm run start`
-- in client folder, run `npm run start`
+- in the root directory, run `npm run start`, it will then concurrently run server and client
 - check out `http://localhost:3000`
 
 ## links
